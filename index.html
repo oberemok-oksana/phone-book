@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__logo">MyPhoneBook</h1>
+      <a href="#" class="exit">Exit</a>
+    </header>
+    <div class="unauthorized-screen">
+      <div class="row">
+        <div class="row__col">
+          <form class="form register-form">
+            <h2 class="form__header">Register</h2>
+            <div class="form__body">
+              <div class="form__control">
+                <label for="register_user_login">Login</label>
+                <input
+                  required
+                  type="text"
+                  class="input"
+                  id="register_user_login"
+                />
+              </div>
+              <div class="form__control">
+                <label for="register_user_password">Password</label>
+                <input
+                  required
+                  type="password"
+                  class="input"
+                  id="register_user_password"
+                />
+              </div>
+              <div class="form__control">
+                <label for="register_user_born">Date of birth</label>
+                <input
+                  required
+                  type="text"
+                  class="input"
+                  id="register_user_born"
+                />
+              </div>
+              <div class="form__control">
+                <button type="submit" class="btn btn_success">Register</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row__col">
+          <form class="form login-form">
+            <h2 class="form__header">Login</h2>
+            <div class="form__body">
+              <div class="form__control">
+                <label for="login_user_login">Login</label>
+                <input
+                  required
+                  type="text"
+                  class="input"
+                  id="login_user_login"
+                />
+              </div>
+              <div class="form__control">
+                <label for="login_user_password">Password</label>
+                <input
+                  required
+                  type="password"
+                  class="input"
+                  id="login_user_password"
+                />
+              </div>
+              <div class="form__control">
+                <button type="submit" class="btn btn_success">Login</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="authorized-screen">
+      <div class="row authorized">
+        <div class="contacts">
+          <h2 class="form__header">My Contacts</h2>
+          <ul class="my-contacts-list"></ul>
+        </div>
+        <div class="wrapper">
+          <h2 class="form__header">Chosen contact</h2>
+          <div class="chosen-contact"></div>
+        </div>
+        <div class="wrapper">
+          <h2 class="form__header">Find contact</h2>
+          <form class="find-contact">
+            <select name="find-type" id="find-type">
+              <option value="find-by-name">Name</option>
+              <option value="find-by-value">Phone/Email</option>
+            </select>
+            <input
+              required
+              type="text"
+              id="serachInput"
+              placeholder="Search..."
+            />
+            <button type="submit" class="btn_success find-btn">Find</button>
+            <button type="reset" class="btn_success reset-btn">Reset</button>
+          </form>
+        </div>
+
+        <div class="adding-contacts">
+          <form class="form add-contact-form">
+            <h2 class="form__header">Add Contacts</h2>
+            <div class="form__body">
+              <div class="form__control my-contacts">
+                <input
+                  required
+                  type="text"
+                  placeholder="Name"
+                  id="contact-name"
+                />
+                <select id="options">
+                  <option value="phone">Phone</option>
+                  <option value="email">Email</option>
+                </select>
+                <input
+                  required
+                  type="text"
+                  id="contact"
+                  placeholder="Phone/Email"
+                />
+                <button type="submit" class="btn_success">Add</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-window">
+      <div class="modal-window__window">
+        <div class="modal-window__body">text</div>
+        <div class="modal-window__footer">
+          <button class="btn_success modal-window__btn">Ok</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./scripts/services/user-services.js"></script>
+    <script src="./scripts/services/contact-services.js"></script>
+    <script src="./scripts/models/user.js"></script>
+    <script src="./scripts/models/contact.js"></script>
+    <script src="./scripts/components/register-form.js"></script>
+    <script src="./scripts/components/login-form.js"></script>
+    <script src="./scripts/components/contacts.js"></script>
+    <script src="./scripts/components/modal-window.js"></script>
+    <script src="./scripts/components/exit-btn.js"></script>
+    <script src="./scripts/main.js"></script>
+  </body>
+</html>
