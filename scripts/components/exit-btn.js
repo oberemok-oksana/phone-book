@@ -5,17 +5,17 @@ class ExitBtn {
   }
 
   init() {
-    this.exitButton = document.querySelector(".exit");
-    this.unauthorizedScreen = document.querySelector(".unauthorized-screen");
-    this.authorizedScreen = document.querySelector(".authorized-screen");
+    this.exitButton = $(".exit");
+    this.unauthorizedScreen = $(".unauthorized-screen");
+    this.authorizedScreen = $(".authorized-screen");
   }
 
   binds() {
-    this.exitButton.addEventListener("click", () => {
+    this.exitButton.on("click", () => {
       window.token = null;
-      this.unauthorizedScreen.style.display = "block";
-      this.authorizedScreen.style.display = "none";
-      this.exitButton.style.display = "none";
+      this.unauthorizedScreen.show();
+      this.authorizedScreen.hide();
+      this.exitButton.hide();
     });
   }
 }

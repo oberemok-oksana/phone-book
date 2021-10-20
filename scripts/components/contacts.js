@@ -9,84 +9,86 @@ class Contacts {
   }
 
   init() {
-    this.containerMyContacts = document.querySelector(".my-contacts-list");
-    this.container = document.querySelector(".add-contact-form");
-    this.findContainer = document.querySelector(".find-contact");
-    this.chosenContactInfo = document.querySelector(".chosen-contact");
-    this.nameInput = this.container.querySelector("#contact-name");
-    this.typeSelect = this.container.querySelector("#options");
-    this.valueInput = this.container.querySelector("#contact");
-    this.addButton = this.container.querySelector("button");
-    this.findButton = this.findContainer.querySelector(".find-btn");
-    this.resetButton = this.findContainer.querySelector(".reset-btn");
-    this.findSelect = this.findContainer.querySelector("#find-type");
-    this.findInput = this.findContainer.querySelector("#serachInput");
+    this.containerMyContacts = $(".my-contacts-list");
+    this.container = $(".add-contact-form");
+    this.findContainer = $(".find-contact");
+    this.chosenContactInfo = $(".chosen-contact");
+    this.nameInput = this.container.find("#contact-name");
+    this.typeSelect = this.container.find("#options");
+    this.valueInput = this.container.find("#contact");
+    this.addButton = this.container.find("button");
+    this.findButton = this.findContainer.find(".find-btn");
+    this.resetButton = this.findContainer.find(".reset-btn");
+    this.findSelect = this.findContainer.find("#find-type");
+    this.findInput = this.findContainer.find("#serachInput");
   }
 
   binds() {
-    this.container.addEventListener("submit", (e) => {
+    this.container.on("submit", (e) => {
       e.preventDefault();
       this.addContact(
-        this.nameInput.value,
-        this.typeSelect.value,
-        this.valueInput.value
+        this.nameInput.val(),
+        this.typeSelect.val(),
+        this.valueInput.val()
       );
     });
     this.loadContacts().then(() => {
       this.showContacts();
     });
-
-    this.containerMyContacts.addEventListener("click", (e) => {
+    //todo refuctor later
+    this.containerMyContacts.on("click", (e) => {
       if (e.target.matches(".my-contacts-list-item")) {
         this.removeActiveClass();
-        e.target.classList.add("active-contact");
+        e.target.addClass("active-contact");
         const contact = this.contactService.contacts.find((contact) => {
           return contact.id === parseInt(e.target.dataset.id);
         });
 
-        this.chosenContactInfo.innerHTML = "";
-        let contactName = document.createElement("div");
-        contactName.classList.add("my-contacts-list-item");
-        contactName.innerHTML = contact.name;
-        let contactType = document.createElement("div");
-        contactType.classList.add("my-contacts-list-item");
-        contactType.innerHTML = contact.type;
-        let contactValue = document.createElement("div");
-        contactValue.classList.add("my-contacts-list-item");
-        contactValue.innerHTML = contact.value;
+        this.chosenContactInfo.text("");
+        let contactName = $("div");
+        contactName.addClass("my-contacts-list-item");
+        contactName.text(contact.name);
+        let contactType = $("div");
+        contactType.addClass("my-contacts-list-item");
+        contactType.text(contact.type);
+        let contactValue = $("div");
+        contactValue.addClass("my-contacts-list-item");
+        contactValue.text(contact.value);
 
         this.chosenContactInfo.append(contactName, contactType, contactValue);
       }
     });
 
-    this.findContainer.addEventListener("submit", (e) => {
+    this.findContainer.on("submit", (e) => {
       e.preventDefault();
-      this.findContact(this.findInput.value, this.findSelect.value);
+      this.findContact(this.findInput.val(), this.findSelect.val());
       this.removeActiveClass();
-      this.chosenContactInfo.innerHTML = "";
-      this.findInput.value = "";
+      this.chosenContactInfo.text("");
+      this.findInput.val("");
     });
 
-    this.resetButton.addEventListener("click", () => {
+    this.resetButton.on("click", () => {
       this.loadContacts().then(() => {
         this.showContacts();
-        this.chosenContactInfo.innerHTML = "";
+        this.chosenContactInfo.text("");
       });
     });
   }
 
   removeActiveClass() {
-    let allChosen = document.querySelectorAll(".active-contact");
-    allChosen.forEach((chosen) => chosen.classList.remove("active-contact"));
+    let allChosen = $(".active-contact");
+    // allChosen.forEach((chosen) => chosen.classList.remove("active-contact"));
+    allChosen.removeClass("active-contact");
   }
 
   showContacts() {
-    this.containerMyContacts.innerHTML = "";
+    this.containerMyContacts.text("");
     this.contactService.contacts.map((contact) => {
-      let person = document.createElement("li");
-      person.classList.add("my-contacts-list-item");
-      person.dataset.id = contact.id;
-      person.innerHTML = contact.name;
+      let person = $("li");
+      person.addClass("my-contacts-list-item");
+      // person.dataset.id = contact.id;
+      person.data("id", contact.id);
+      person.text(contact.name);
       this.containerMyContacts.append(person);
     });
   }
@@ -98,16 +100,19 @@ class Contacts {
   addContact(name, type, value) {
     this.contactService.addContact(name, type, value).then(() => {
       if (
-        this.nameInput.value === "" ||
-        this.typeSelect.value === "" ||
-        this.valueInput.value === ""
+        // this.nameInput.value === "" ||
+        // this.typeSelect.value === "" ||
+        // this.valueInput.value === ""
+        this.nameInput.val() === "" ||
+        this.typeSelect.val() === "" ||
+        this.valueInput.val() === ""
       ) {
-        this.modalWindow.show("Please, fill in all fields. ");
+        this.modalWindow.show("Please, fill in all fields.... ");
       } else {
         this.modalWindow.show("New contact has been created.");
-        this.nameInput.value = "";
-        this.typeSelect.value = "phone";
-        this.valueInput.value = "";
+        this.nameInput.val("");
+        this.typeSelect.val("phone");
+        this.valueInput.val("");
         this.contactService.getMyContacts().then(() => {
           this.showContacts();
         });
@@ -116,7 +121,7 @@ class Contacts {
   }
 
   findContact(name, type) {
-    if (this.findInput.value === "") {
+    if (this.findInput.val() === "") {
       this.modalWindow.show("Please fill in the search field.");
       return;
     }

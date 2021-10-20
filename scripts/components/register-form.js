@@ -4,24 +4,23 @@ class RegisterForm {
     this.userService = userService;
     this.modalWindow = modalWindow;
     this.onRegister = () => {};
-    document.addEventListener("DOMContentLoaded", () => {
+    $(() => {
       this.init();
       this.binds();
     });
   }
 
   init() {
-    this.container = document.querySelector(this.selector);
-    this.loginInput = this.container.querySelector("#register_user_login");
-    this.passwordInput = this.container.querySelector(
-      "#register_user_password"
-    );
-    this.bornInput = this.container.querySelector("#register_user_born");
-    this.button = this.container.querySelector("button");
+    this.container = $(this.selector);
+    this.loginInput = this.container.find("#register_user_login");
+    this.passwordInput = this.container.find("#register_user_password");
+    this.bornInput = this.container.find("#register_user_born");
+    this.button = this.container.find("button");
   }
 
   binds() {
-    this.container.addEventListener("submit", (e) => {
+    this.container.on("submit", (e) => {
+      debugger;
       e.preventDefault();
       this.register();
     });
@@ -29,9 +28,9 @@ class RegisterForm {
 
   register() {
     let user = new User(
-      this.loginInput.value,
-      this.passwordInput.value,
-      this.bornInput.value
+      this.loginInput.val(),
+      this.passwordInput.val(),
+      this.bornInput.val()
     );
 
     this.userService.register(user).then((response) => {
@@ -56,8 +55,8 @@ class RegisterForm {
   }
 
   clearForm() {
-    this.passwordInput.value = "";
-    this.bornInput.value = "";
-    this.loginInput.value = "";
+    this.passwordInput.val("");
+    this.bornInput.val("");
+    this.loginInput.val("");
   }
 }

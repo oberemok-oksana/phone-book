@@ -10,5 +10,3 @@ let loginForm = new LoginForm(
   modalWindow
 );
 let exitBtn = new ExitBtn();
-
-console.log($);
