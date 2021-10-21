@@ -35,28 +35,20 @@ class Contacts {
     this.loadContacts().then(() => {
       this.showContacts();
     });
-    //todo refuctor later
-    this.containerMyContacts.on("click", (e) => {
-      if (e.target.matches(".my-contacts-list-item")) {
-        this.removeActiveClass();
-        e.target.addClass("active-contact");
-        const contact = this.contactService.contacts.find((contact) => {
-          return contact.id === parseInt(e.target.dataset.id);
-        });
 
-        this.chosenContactInfo.text("");
-        let contactName = $("div");
-        contactName.addClass("my-contacts-list-item");
-        contactName.text(contact.name);
-        let contactType = $("div");
-        contactType.addClass("my-contacts-list-item");
-        contactType.text(contact.type);
-        let contactValue = $("div");
-        contactValue.addClass("my-contacts-list-item");
-        contactValue.text(contact.value);
+    this.containerMyContacts.on("click", ".my-contacts-list-item", (e) => {
+      const target = $(e.target);
+      this.removeActiveClass();
+      target.addClass("active-contact");
+      const contact = this.contactService.contacts.find((contact) => {
+        return contact.id === parseInt(target.data("id"));
+      });
 
-        this.chosenContactInfo.append(contactName, contactType, contactValue);
-      }
+      this.chosenContactInfo.html(`
+        <div class="my-contacts-list-item">${contact.name}</div>
+        <div class="my-contacts-list-item">${contact.type}</div>
+        <div class="my-contacts-list-item">${contact.value}</div>
+      `);
     });
 
     this.findContainer.on("submit", (e) => {
@@ -77,16 +69,14 @@ class Contacts {
 
   removeActiveClass() {
     let allChosen = $(".active-contact");
-    // allChosen.forEach((chosen) => chosen.classList.remove("active-contact"));
     allChosen.removeClass("active-contact");
   }
 
   showContacts() {
     this.containerMyContacts.text("");
-    this.contactService.contacts.map((contact) => {
-      let person = $("li");
+    this.contactService.contacts.forEach((contact) => {
+      let person = $("<li></li>");
       person.addClass("my-contacts-list-item");
-      // person.dataset.id = contact.id;
       person.data("id", contact.id);
       person.text(contact.name);
       this.containerMyContacts.append(person);
@@ -100,9 +90,6 @@ class Contacts {
   addContact(name, type, value) {
     this.contactService.addContact(name, type, value).then(() => {
       if (
-        // this.nameInput.value === "" ||
-        // this.typeSelect.value === "" ||
-        // this.valueInput.value === ""
         this.nameInput.val() === "" ||
         this.typeSelect.val() === "" ||
         this.valueInput.val() === ""

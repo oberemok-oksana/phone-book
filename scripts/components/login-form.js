@@ -29,7 +29,7 @@ class LoginForm {
   }
 
   login(name, password) {
-    this.userService.login(name, password).then((response) => {
+    this.userService.login(name, password).done((response) => {
       if (response.status === "error") this.modalWindow.show(response.error);
       else {
         if (this.loginInput.val() === "" || this.passwordInput.val() === "") {

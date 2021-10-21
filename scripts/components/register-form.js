@@ -20,7 +20,6 @@ class RegisterForm {
 
   binds() {
     this.container.on("submit", (e) => {
-      debugger;
       e.preventDefault();
       this.register();
     });
