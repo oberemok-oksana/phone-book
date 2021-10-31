@@ -1,8 +1,5 @@
 @import 'btns.scss';
-
-$primary-color: #1d7373;
-$secondary-color: #777;
-$background-active-color: #fff;
+@import 'colors.scss';
 
 .header {
   display: flex;
