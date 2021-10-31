@@ -51,7 +51,7 @@
   display: flex;
   gap: 20px;
   padding: 10px;
-  .my-contacts {
+  &.my-contacts {
     flex-direction: column;
     padding-left: 15px;
     padding-right: 15px;
