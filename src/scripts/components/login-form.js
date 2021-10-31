@@ -1,4 +1,5 @@
-class LoginForm {
+import Contacts from "components/contacts";
+export default class LoginForm {
   constructor(selector, userService, contactService, modalWindow) {
     this.selector = selector;
     this.userService = userService;

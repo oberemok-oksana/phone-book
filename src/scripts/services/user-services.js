@@ -1,4 +1,5 @@
-class UserServices {
+// import User from "../models/user";
+export default class UserServices {
   getAll() {
     return fetch(UserServices.BASE_URL + "users")
       .then((response) => response.json())

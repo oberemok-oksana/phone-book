@@ -1,4 +1,4 @@
-class Contacts {
+export default class Contacts {
   constructor(selector, contactService, modalWindow) {
     this.selector = selector;
     this.contactService = contactService;

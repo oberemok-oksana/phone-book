@@ -1,4 +1,6 @@
-class ContactServices {
+import Contact from "models/contact.js";
+
+export default class ContactServices {
   constructor() {
     this.contacts = [];
   }

@@ -1,0 +1,20 @@
+@import 'colors.scss';
+
+.btn_success {
+  margin: 0 auto;
+  border-radius: 4px;
+  background-color: $primary-color;
+  color: $background-active-color;
+  padding: 4px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  &:active {
+    transform: scale(1.1);
+  }
+}
+
+.reset-btn {
+  background-color: $background-active-color;
+  color: #006363;
+  margin-bottom: 15px;
+}

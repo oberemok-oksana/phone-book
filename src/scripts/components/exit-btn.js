@@ -1,4 +1,4 @@
-class ExitBtn {
+export default class ExitBtn {
   constructor() {
     this.init();
     this.binds();
