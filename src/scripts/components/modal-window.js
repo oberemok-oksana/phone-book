@@ -1,4 +1,4 @@
-class ModalWindow {
+export default class ModalWindow {
   constructor(selector) {
     this.selector = selector;
     document.addEventListener("DOMContentLoaded", () => {

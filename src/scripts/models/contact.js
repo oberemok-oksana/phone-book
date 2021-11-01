@@ -1,4 +1,4 @@
-class Contact {
+export default class Contact {
   constructor(id, name, type, value) {
     this.name = name;
     this.type = type;

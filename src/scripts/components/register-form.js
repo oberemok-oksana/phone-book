@@ -1,4 +1,4 @@
-class RegisterForm {
+export default class RegisterForm {
   constructor(selector, userService, modalWindow) {
     this.selector = selector;
     this.userService = userService;
