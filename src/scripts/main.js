@@ -1,4 +1,4 @@
-import "../style.css";
+import "../style.scss";
 import UserServices from "./services/user-services";
 import ContactServices from "./services/contact-services";
 import ModalWindow from "./components/modal-window";
