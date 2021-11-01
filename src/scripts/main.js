@@ -1,3 +1,5 @@
+import "../style.css";
+
 let userService = new UserServices();
 let contactService = new ContactServices();
 let modalWindow = new ModalWindow(".modal-window");
